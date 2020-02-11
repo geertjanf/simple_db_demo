@@ -18,11 +18,4 @@ lookup_options:
 # ------------------------------------------------------------------------------
 ora_profile::database::source:                                            puppet:///modules/software
 
-
-# ------------------------------------------------------------------------------
-#
-#  Settings for database::db_definition
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::db_definition::system_password:                    Welcome01
-ora_profile::database::db_definition::sys_password:                       Change_on_1nstall
+easy_type::generate_password_mode:  development

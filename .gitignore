@@ -68,3 +68,4 @@
 /modules/registry
 /modules/chocolatey
 /puppet_version
+/modules/pwshlib
