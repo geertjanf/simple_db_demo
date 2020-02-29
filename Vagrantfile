@@ -139,7 +139,7 @@ def raw_setup(config, server, srv, hostname)
     end
   end
 
-  config.trigger.after :provision do |trigger|
+  srv.trigger.after :provision do |trigger|
     if srv.vm.communicator == 'ssh'
       trigger.run_remote = {
         inline: "puppet apply /etc/puppetlabs/code/environments/production/manifests/site.pp || true"
@@ -181,7 +181,7 @@ def puppet_agent_setup(config, server, srv, hostname)
   #
   # First we need to instal the agent.
   #
-  config.trigger.after :up do |trigger|
+  srv.trigger.after :up do |trigger|
     #
     # Fix hostnames because Vagrant mixes it up.
     #
@@ -213,7 +213,7 @@ def puppet_agent_setup(config, server, srv, hostname)
         EOD
     end
   end
-  config.trigger.after :provision do |trigger|
+  srv.trigger.after :provision do |trigger|
     if srv.vm.communicator == 'ssh'
       trigger.run_remote = {inline: <<~EOD}
         #
@@ -361,8 +361,8 @@ def plugin_check(plugin_name)
 end
 
 # Check if all required software files from servers.yaml are present in repo.
-def local_software_file_check(config, file_names)
-  config.trigger.before [:up, :reload, :provision] do |trigger|
+def local_software_file_check(srv, file_names)
+  srv.trigger.before [:up, :reload, :provision] do |trigger|
     trigger.ruby do |env, machine|
       files_found = true
       file_names.each do |file_name|
@@ -420,7 +420,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Start VM configuration
     config.vm.define name do |srv|
       # Perform checks
-      config.trigger.after :up do |trigger|
+      srv.trigger.after :up do |trigger|
         #
         # Perform plugin checks before main setup
         #
@@ -428,8 +428,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         #
         # Perform software checks before main setup
         #
-        local_software_file_check(config, server['software_files']) if server['software_files']
-        local_software_file_check(config, [puppet_installer]) if puppet_installer # Check if installer folder is present
+        local_software_file_check(srv, server['software_files']) if server['software_files']
+        local_software_file_check(srv, [puppet_installer]) if puppet_installer # Check if installer folder is present
       end
 
       srv.vm.communicator = server['protocol'] || 'ssh'
@@ -482,7 +482,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
       end
 
-      config.vm.provider :virtualbox do |vb|
+      srv.vm.provider :virtualbox do |vb|
         # vb.gui = true
         vb.cpus = server['cpucount'] || 1
         vb.memory = server['ram'] || 4096
