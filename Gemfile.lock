@@ -43,7 +43,7 @@ GEM
       rake
       semverse (~> 2.0)
       solve
-    rake (12.3.2)
+    rake (13.0.1)
     semantic_puppet (1.0.2)
     semverse (2.0.0)
     solve (4.0.2)
