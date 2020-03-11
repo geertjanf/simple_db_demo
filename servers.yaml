@@ -27,7 +27,7 @@ pe-dbmaster:
   cpucount:         2
   ram:              3072
   type:             pe-master
-  puppet_installer: puppet-enterprise-2019.1.0-el-7-x86_64/puppet-enterprise-installer
+  puppet_installer: puppet-enterprise-2019.4.0-el-7-x86_64/puppet-enterprise-installer
 
 #
 # All masterless nodes

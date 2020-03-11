@@ -69,3 +69,4 @@
 /modules/chocolatey
 /puppet_version
 /modules/pwshlib
+/modules/zfs_appliance
