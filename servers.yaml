@@ -5,13 +5,22 @@
 defaults:
   domain_name:     example.com
   cpucount:         1
-  box:              enterprisemodules/centos-7.3-x86_64-nocm
-  virtualboxorafix: enable
+  needs_storage:    false
+  additional_hosts:
+    dbmaster:
+      ip: 192.168.253.10
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
+  dhcp_fix:         false
+  virtualboxorafix: true
+  custom_facts:
+    deployment_zone: vagrant
+
 #
 # The default settings for all ML nodes
 #
 ml-defaults:
   type:             masterless
+
 #
 # The default settings for all PE nodes
 #
@@ -23,11 +32,12 @@ pe-defaults:
 # The settings for the Puppet Enterprise Server
 #
 pe-dbmaster:
-  public_ip:       '192.168.253.10'
+  public_ip:        192.168.253.10
   cpucount:         2
   ram:              3072
   type:             pe-master
-  puppet_installer: puppet-enterprise-2019.1.0-el-7-x86_64/puppet-enterprise-installer
+  virtualboxorafix: false
+  puppet_installer: puppet-enterprise-2019.3.0-el-7-x86_64/puppet-enterprise-installer
 
 #
 # All masterless nodes
@@ -67,7 +77,6 @@ ml-windb180:
   box:              mrlesmithjr/windows2019
   cpucount:         4
   ram:              8192
-  type:             masterless_windows_setupwe
   software_files:
     - WINDOWS.X64_180000_db_home.zip
     - puppet-agent-6.4.2-x64.msi
