@@ -5,7 +5,7 @@
 defaults:
   domain_name:     example.com
   cpucount:         1
-  box:              enterprisemodules/centos-7.3-x86_64-nocm
+  box:              enterprisemodules/ol-8.1-x86_64-nocm
   virtualboxorafix: enable
 #
 # The default settings for all ML nodes
@@ -34,18 +34,21 @@ pe-dbmaster:
 #
 ml-db112:
   public_ip:        '192.168.253.112'
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
     - p13390677_112040_Linux-x86-64_1of7.zip
     - p13390677_112040_Linux-x86-64_2of7.zip
 
 ml-db121:
   public_ip:        '192.168.253.121'
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
     - linuxamd64_12102_database_1of2.zip
     - linuxamd64_12102_database_2of2.zip
 
 ml-db122:
   public_ip:        '192.168.253.122'
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
     - linuxx64_12201_database.zip
     - p6880880_121010_Linux-x86-64.zip
@@ -76,18 +79,21 @@ ml-windb180:
 #
 pe-db112:
   public_ip:        '192.168.253.112'
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
     - p13390677_112040_Linux-x86-64_1of7.zip
     - p13390677_112040_Linux-x86-64_2of7.zip
 
 pe-db121:
   public_ip:        '192.168.253.121'
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
     - linuxamd64_12102_database_1of2.zip
     - linuxamd64_12102_database_2of2.zip
 
 pe-db122:
   public_ip:        '192.168.253.122'
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
     - linuxx64_12201_database.zip
     - p6880880_121010_Linux-x86-64.zip
