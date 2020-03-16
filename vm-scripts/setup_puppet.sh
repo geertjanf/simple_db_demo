@@ -17,7 +17,19 @@ else
   then
     cp /vagrant/.netrc ~
   fi
-  /opt/puppetlabs/puppet/bin/r10k puppetfile install --force > /dev/null # 2>&1
+  #
+  # Check which Puppetfile to use. If a file use_latest exists, use the
+  # Puppetfile_latest which by default fetches files from latest master branch
+  #
+  if [ -e /vagrant/use_latest_modules ]
+  then
+    echo "Using latest versions of modules..."
+    PUPPETFILE="Puppetfile_latest"
+  else
+    echo "Using released versions of modules..."
+    PUPPETFILE="Puppetfile"
+  fi
+  /opt/puppetlabs/puppet/bin/r10k puppetfile install --puppetfile ${PUPPETFILE} --force > /dev/null # 2>&1
 
   #
   # Setup hiera search and backend. We need this to config our systems
